@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bridge.mapper.BottomStructureDetectionResultMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bridge.pojo.BottomStructureDetectionResult">
+        <id column="bridge_id" property="bridgeId" />
+        <result column="periodic_detection_date" property="periodicDetectionDate" />
+        <result column="bottom_structure_damage_type_id" property="bottomStructureDamageTypeId" />
+        <result column="bottom_structure_span_num" property="bottomStructureSpanNum" />
+        <result column="bottom_structure_deduction" property="bottomStructureDeduction" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        bridge_id, periodic_detection_date, bottom_structure_damage_type_id, bottom_structure_span_num, bottom_structure_deduction
+    </sql>
+
+</mapper>

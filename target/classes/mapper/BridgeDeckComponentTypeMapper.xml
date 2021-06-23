@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bridge.mapper.BridgeDeckComponentTypeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bridge.pojo.BridgeDeckComponentType">
+        <id column="bridge_deck_component_id" property="bridgeDeckComponentId" />
+        <result column="bridge_deck_component_name" property="bridgeDeckComponentName" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        bridge_deck_component_id, bridge_deck_component_name
+    </sql>
+
+</mapper>

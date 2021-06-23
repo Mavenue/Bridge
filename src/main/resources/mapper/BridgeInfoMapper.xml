@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bridge.mapper.BridgeInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bridge.pojo.BridgeInfo">
+        <id column="bridge_id" property="bridgeId" />
+        <result column="user_id" property="userId" />
+        <result column="structure_id" property="structureId" />
+        <result column="bridge_name" property="bridgeName" />
+        <result column="bridge_location" property="bridgeLocation" />
+        <result column="management_organization" property="managementOrganization" />
+        <result column="maintenance_organization" property="maintenanceOrganization" />
+        <result column="development_organization" property="developmentOrganization" />
+        <result column="design_organization" property="designOrganization" />
+        <result column="supervisor_organization" property="supervisorOrganization" />
+        <result column="construction_organization" property="constructionOrganization" />
+        <result column="completion_date" property="completionDate" />
+        <result column="cost" property="cost" />
+        <result column="maintenance_type" property="maintenanceType" />
+        <result column="span_num" property="spanNum" />
+        <result column="load" property="load" />
+        <result column="maintenance_class" property="maintenanceClass" />
+        <result column="loading_limit" property="loadingLimit" />
+        <result column="antiknock" property="antiknock" />
+        <result column="skew_angle" property="skewAngle" />
+        <result column="combination_models" property="combinationModels" />
+        <result column="area" property="area" />
+        <result column="length" property="length" />
+        <result column="width" property="width" />
+        <result column="roadway_width" property="roadwayWidth" />
+        <result column="sidewalk_width" property="sidewalkWidth" />
+        <result column="riverway_class" property="riverwayClass" />
+        <result column="highest_water_level" property="highestWaterLevel" />
+        <result column="ordinary_water_level" property="ordinaryWaterLevel" />
+        <result column="tabulation_date" property="tabulationDate" />
+        <result column="deleted" property="deleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        bridge_id, user_id, structure_id, bridge_name, bridge_location, management_organization, maintenance_organization, development_organization, design_organization, supervisor_organization, construction_organization, completion_date, cost, maintenance_type, span_num, load, maintenance_class, loading_limit, antiknock, skew_angle, combination_models, area, length, width, roadway_width, sidewalk_width, riverway_class, highest_water_level, ordinary_water_level, tabulation_date, deleted
+    </sql>
+
+</mapper>

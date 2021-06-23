@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bridge.mapper.RoutineDetectionResultMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bridge.pojo.RoutineDetectionResult">
+        <id column="detection_item_id" property="detectionItemId" />
+        <result column="bridge_id" property="bridgeId" />
+        <result column="routine_detection_date" property="routineDetectionDate" />
+        <result column="is_completion" property="isCompletion" />
+        <result column="damage_type" property="damageType" />
+        <result column="damage_degree" property="damageDegree" />
+        <result column="damage_location" property="damageLocation" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        detection_item_id, bridge_id, routine_detection_date, is_completion, damage_type, damage_degree, damage_location, remark
+    </sql>
+
+</mapper>

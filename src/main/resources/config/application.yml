@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bridge?useUnicode=true&useSSL=false&characterEncoding=utf8
+    username: root
+    password: ssxd1147
+    hikari:
+      pool-name: DateHikariCP
+      minimum-idle: 5
+      idle-timeout: 180000
+      maximum-pool-size: 10
+      auto-commit: true
+      max-lifetime: 180000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  type-aliases-package: com.xxx.pojo
+
+
+jwt:
+  tokenHeader: Authorization
+  secret: mavenue_secret
+  expiration: 604800
+  tokenHead: Bearer

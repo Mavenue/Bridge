@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bridge.mapper.PeriodicDetectionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bridge.pojo.PeriodicDetection">
+        <id column="bridge_id" property="bridgeId" />
+        <result column="periodic_detection_date" property="periodicDetectionDate" />
+        <result column="user_id" property="userId" />
+        <result column="bci" property="bci" />
+        <result column="bsi" property="bsi" />
+        <result column="intact_condition_class" property="intactConditionClass" />
+        <result column="structure_condition_class" property="structureConditionClass" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        bridge_id, periodic_detection_date, user_id, bci, bsi, intact_condition_class, structure_condition_class
+    </sql>
+
+</mapper>
