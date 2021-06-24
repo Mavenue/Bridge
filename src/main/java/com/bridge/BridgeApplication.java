@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.bridge.mapper")
+@MapperScan("com.bridge.sys.mapper")
 public class BridgeApplication {
 
     public static void main(String[] args) {

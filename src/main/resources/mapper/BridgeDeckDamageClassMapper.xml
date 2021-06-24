@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bridge.mapper.BridgeDeckDamageClassMapper">
+<mapper namespace="com.bridge.sys.mapper.BridgeDeckDamageClassMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.bridge.pojo.BridgeDeckDamageClass">
+    <resultMap id="BaseResultMap" type="com.bridge.sys.pojo.BridgeDeckDamageClass">
         <id column="bridge_deck_damage_class_id" property="bridgeDeckDamageClassId" />
         <result column="bridge_deck_damage_type_id" property="bridgeDeckDamageTypeId" />
         <result column="bridge_deck_damage_class_name" property="bridgeDeckDamageClassName" />
-        <result column="bridge_deck_class_deducation" property="bridgeDeckClassDeducation" />
+        <result column="bridge_deck_class_deduction" property="bridgeDeckClassDeduction" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        bridge_deck_damage_class_id, bridge_deck_damage_type_id, bridge_deck_damage_class_name, bridge_deck_class_deducation
+        bridge_deck_damage_class_id, bridge_deck_damage_type_id, bridge_deck_damage_class_name, bridge_deck_class_deduction
     </sql>
 
 </mapper>
