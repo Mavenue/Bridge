@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bridge.mapper.BottomStructureDamageClassMapper">
+<mapper namespace="com.bridge.sys.mapper.BottomStructureDamageClassMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.bridge.pojo.BottomStructureDamageClass">
+    <resultMap id="BaseResultMap" type="com.bridge.sys.pojo.BottomStructureDamageClass">
         <id column="bottom_structure_damage_class_id" property="bottomStructureDamageClassId" />
         <result column="bottom_structure_damage_type_id" property="bottomStructureDamageTypeId" />
         <result column="bottom_structure_damage_class_name" property="bottomStructureDamageClassName" />
-        <result column="bottom_structure_class_deducation" property="bottomStructureClassDeducation" />
+        <result column="bottom_structure_class_deduction" property="bottomStructureClassDeduction" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        bottom_structure_damage_class_id, bottom_structure_damage_type_id, bottom_structure_damage_class_name, bottom_structure_class_deducation
+        bottom_structure_damage_class_id, bottom_structure_damage_type_id, bottom_structure_damage_class_name, bottom_structure_class_deduction
     </sql>
 
 </mapper>

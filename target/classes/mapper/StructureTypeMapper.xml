@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bridge.mapper.StructureTypeMapper">
+<mapper namespace="com.bridge.sys.mapper.StructureTypeMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.bridge.pojo.StructureType">
+    <resultMap id="BaseResultMap" type="com.bridge.sys.pojo.StructureType">
         <id column="structure_id" property="structureId" />
         <result column="type_name" property="typeName" />
     </resultMap>
