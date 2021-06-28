@@ -31,6 +31,18 @@ public class PeriodicDetection implements Serializable {
 
     private Integer bsi;
 
+    private Integer topBci;
+
+    private Integer topBsi;
+
+    private Integer bottomBci;
+
+    private Integer bottomBsi;
+
+    private Integer bridgeDeckBci;
+
+    private Integer bridgeDeckBsi;
+
     private String intactConditionClass;
 
     private String structureConditionClass;

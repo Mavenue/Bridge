@@ -7,12 +7,12 @@
         <id column="bridge_deck_damage_class_id" property="bridgeDeckDamageClassId" />
         <result column="bridge_deck_damage_type_id" property="bridgeDeckDamageTypeId" />
         <result column="bridge_deck_damage_class_name" property="bridgeDeckDamageClassName" />
-        <result column="bridge_deck_class_deducation" property="bridgeDeckClassDeducation" />
+        <result column="bridge_deck_class_deduction" property="bridgeDeckClassDeduction" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        bridge_deck_damage_class_id, bridge_deck_damage_type_id, bridge_deck_damage_class_name, bridge_deck_class_deducation
+        bridge_deck_damage_class_id, bridge_deck_damage_type_id, bridge_deck_damage_class_name, bridge_deck_class_deduction
     </sql>
 
 </mapper>

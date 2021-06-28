@@ -8,12 +8,12 @@
         <result column="top_structure_component_id" property="topStructureComponentId" />
         <result column="top_structure_damage_type_name" property="topStructureDamageTypeName" />
         <result column="top_structure_damage_type_definition" property="topStructureDamageTypeDefinition" />
-        <result column="top_structure_damage_type_explaination" property="topStructureDamageTypeExplaination" />
+        <result column="top_structure_damage_type_explanation" property="topStructureDamageTypeExplanation" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        top_structure_damage_type_id, top_structure_component_id, top_structure_damage_type_name, top_structure_damage_type_definition, top_structure_damage_type_explaination
+        top_structure_damage_type_id, top_structure_component_id, top_structure_damage_type_name, top_structure_damage_type_definition, top_structure_damage_type_explanation
     </sql>
 
 </mapper>

@@ -8,12 +8,12 @@
         <result column="bridge_deck_component_id" property="bridgeDeckComponentId" />
         <result column="bridge_deck_damage_type_name" property="bridgeDeckDamageTypeName" />
         <result column="bridge_deck_damage_type_definition" property="bridgeDeckDamageTypeDefinition" />
-        <result column="bridge_deck_damage_type_explaination" property="bridgeDeckDamageTypeExplaination" />
+        <result column="bridge_deck_damage_type_explanation" property="bridgeDeckDamageTypeExplanation" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        bridge_deck_damage_type_id, bridge_deck_component_id, bridge_deck_damage_type_name, bridge_deck_damage_type_definition, bridge_deck_damage_type_explaination
+        bridge_deck_damage_type_id, bridge_deck_component_id, bridge_deck_damage_type_name, bridge_deck_damage_type_definition, bridge_deck_damage_type_explanation
     </sql>
 
 </mapper>

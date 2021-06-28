@@ -6,7 +6,7 @@
     <resultMap id="BaseResultMap" type="com.bridge.sys.pojo.User">
         <id column="user_id" property="userId" />
         <result column="username" property="username" />
-        <result column="psaaword" property="psaaword" />
+        <result column="password" property="password" />
         <result column="type" property="type" />
         <result column="tel" property="tel" />
         <result column="gender" property="gender" />
@@ -15,7 +15,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        user_id, username, psaaword, type, tel, gender, address
+        user_id, username, password, type, tel, gender, address
     </sql>
 
 </mapper>

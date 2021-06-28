@@ -1,7 +1,9 @@
 package com.bridge.sys.service;
 
+import com.bridge.common.utils.RespBean;
 import com.bridge.sys.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bridge.sys.pojo.vo.LoginInfo;
 
 /**
  * <p>
@@ -13,4 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUserService extends IService<User> {
 
+    RespBean login(LoginInfo loginInfo);
+
+    User getUserInfo(String username);
 }

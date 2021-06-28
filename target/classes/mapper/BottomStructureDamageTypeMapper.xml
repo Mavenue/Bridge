@@ -8,12 +8,12 @@
         <result column="bottom_structure_component_id" property="bottomStructureComponentId" />
         <result column="bottom_structure_damage_type_name" property="bottomStructureDamageTypeName" />
         <result column="bottom_structure_damage_type_definition" property="bottomStructureDamageTypeDefinition" />
-        <result column="bottom_structure_damage_type_explaination" property="bottomStructureDamageTypeExplaination" />
+        <result column="bottom_structure_damage_type_explanation" property="bottomStructureDamageTypeExplanation" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        bottom_structure_damage_type_id, bottom_structure_component_id, bottom_structure_damage_type_name, bottom_structure_damage_type_definition, bottom_structure_damage_type_explaination
+        bottom_structure_damage_type_id, bottom_structure_component_id, bottom_structure_damage_type_name, bottom_structure_damage_type_definition, bottom_structure_damage_type_explanation
     </sql>
 
 </mapper>

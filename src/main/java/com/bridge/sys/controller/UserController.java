@@ -1,10 +1,12 @@
 package com.bridge.sys.controller;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import com.bridge.common.utils.RespBean;
+import com.bridge.sys.pojo.User;
+import com.bridge.sys.pojo.vo.LoginInfo;
+import com.bridge.sys.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -18,8 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 
-    @GetMapping(value = "/user")
-    public String getInfo() {
-        return "hello world";
+    @Autowired
+    private IUserService userService;
+
+    @PostMapping(value = "/login")
+    public RespBean login(@RequestBody LoginInfo loginInfo) {
+        return userService.login(loginInfo);
+    }
+    @GetMapping(value = "/{username}")
+    public User getUserInfo(@PathVariable String username) {
+        if (username == null) {
+            return null;
+        }
+        return userService.getUserInfo(username);
     }
 }
