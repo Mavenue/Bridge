@@ -11,11 +11,18 @@
         <result column="bsi" property="bsi" />
         <result column="intact_condition_class" property="intactConditionClass" />
         <result column="structure_condition_class" property="structureConditionClass" />
+        <result column="top_bci" property="topBci"/>
+        <result column="top_bsi" property="topBsi"/>
+        <result column="bottom_bci" property="bottomBci"/>
+        <result column="bottom_bsi" property="bottomBsi"/>
+        <result column="bridge_deck_bci" property="bridgeDeckBci"/>
+        <result column="bridge_deck_bsi" property="bridgeDeckBsi"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        bridge_id, periodic_detection_date, user_id, bci, bsi, intact_condition_class, structure_condition_class
+        bridge_id, periodic_detection_date, user_id, bci, bsi, intact_condition_class, structure_condition_class,
+        top_bci, top_bsi, bottom_bci, bottom_bsi, bridge_deck_bci, bridge_deck_bsi
     </sql>
 
 </mapper>

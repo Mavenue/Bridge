@@ -6,11 +6,12 @@
     <resultMap id="BaseResultMap" type="com.bridge.sys.pojo.BottomComponentType">
         <id column="bottom_structure_component_id" property="bottomStructureComponentId" />
         <result column="bottom_structure_component_name" property="bottomStructureComponentName" />
+        <result column="part" property="part"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        bottom_structure_component_id, bottom_structure_component_name
+        bottom_structure_component_id, bottom_structure_component_name, part
     </sql>
 
 </mapper>

@@ -24,5 +24,6 @@ public class BottomComponentType implements Serializable {
 
     private String bottomStructureComponentName;
 
+    private String part;
 
 }
