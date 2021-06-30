@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/bridge?useUnicode=true&useSSL=false&characterEncoding=utf8
+    url: jdbc:mysql://8.140.187.119:3306/bridge?useUnicode=true&useSSL=false&characterEncoding=utf8
     username: root
-    password: ssxd1147
+    password: 940721
     hikari:
       pool-name: DateHikariCP
       minimum-idle: 5
@@ -16,7 +16,7 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/*Mapper.xml
-  type-aliases-package: com.xxx.pojo
+  type-aliases-package: com.bridge.sys.pojo
 
 
 jwt:

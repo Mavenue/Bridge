@@ -18,4 +18,13 @@
         user_id, username, password, type, tel, gender, address
     </sql>
 
+    <insert id="addUser" parameterType="userDto">
+        insert into user(username, password, type, tel, gender, address) values
+        (#{username}, #{password}, #{type}, #{tel}, #{gender}, #{address});
+    </insert>
+
+    <update id="updateUserAuth" parameterType="userDto">
+        update user set type = #{type} where user_id = #{userId};
+    </update>
+
 </mapper>

@@ -1,9 +1,17 @@
 package com.bridge.sys.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.bridge.common.utils.RespBean;
+import com.bridge.sys.pojo.RoutineDetectionItem;
+import com.bridge.sys.pojo.dto.RoutineDetectionResultsDto;
+import com.bridge.sys.service.IRoutineDetectionService;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/routine-detection")
 public class RoutineDetectionController {
+
 
 }

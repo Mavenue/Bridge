@@ -2,6 +2,8 @@ package com.bridge.sys.mapper;
 
 import com.bridge.sys.pojo.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.bridge.sys.pojo.dto.UpdateAuthUserDto;
+import com.bridge.sys.pojo.dto.UserDto;
 
 /**
  * <p>
@@ -13,4 +15,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UserMapper extends BaseMapper<User> {
 
+    Integer addUser(UserDto userDto);
+
+    Integer updateUserAuth(UpdateAuthUserDto updateAuthUserDto);
 }
