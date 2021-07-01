@@ -2,6 +2,8 @@ package com.bridge.sys.pojo;
 
 import java.time.LocalDate;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -67,6 +69,7 @@ public class BridgeInfo implements Serializable {
     @ApiModelProperty(value = "桥梁跨数", required = true)
     private Integer spanNum;
 
+    @TableField(value = "`load`")
     @ApiModelProperty(value = "设计荷载", required = true)
     private String load;
 

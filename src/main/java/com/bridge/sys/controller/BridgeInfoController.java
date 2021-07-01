@@ -27,8 +27,8 @@ public class BridgeInfoController {
     private IBridgeInfoService bridgeInfoService;
 
     @ApiOperation(value = "分页获取所有桥梁资料卡信息")
-    @GetMapping(value = "/all-info/{current}/{size}/{bridgeName}")
-    public Page<BridgeInfo> getAllBridgeInfo(@PathVariable long current, @PathVariable long size, @PathVariable String bridgeName) {
+    @GetMapping(value = "/all-info")
+    public Page<BridgeInfo> getAllBridgeInfo(long current, long size, String bridgeName) {
         return bridgeInfoService.getAllBridgeInfo(current, size, bridgeName);
     }
 

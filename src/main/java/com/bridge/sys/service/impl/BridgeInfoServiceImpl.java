@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * <p>
@@ -58,6 +61,9 @@ public class BridgeInfoServiceImpl extends ServiceImpl<BridgeInfoMapper, BridgeI
             if (userId == null) {
                 return RespBean.error("建立桥梁资料卡失败，权限不足");
             }
+            Integer total = bridgeInfoMapper.selectCount(null);
+            bridgeInfo.setBridgeId(String.format("BI-%07d", total + 1));
+            bridgeInfo.setTabulationDate(LocalDate.now());
             bridgeInfo.setUserId(userId);
             if (bridgeInfoMapper.insert(bridgeInfo) > 0) {
                 return RespBean.success("建立桥梁资料卡成功");

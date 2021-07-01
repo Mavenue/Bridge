@@ -12,6 +12,7 @@ class BridgeApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println(String.format("BI-%07d", 20 + 1));
     }
 
 }
