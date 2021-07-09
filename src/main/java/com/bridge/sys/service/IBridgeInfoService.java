@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bridge.common.utils.RespBean;
 import com.bridge.sys.pojo.BridgeInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bridge.sys.pojo.vo.BridgeNameIdMapVo;
 
 import java.security.Principal;
+import java.util.List;
 
 /**
  * <p>
@@ -41,4 +43,17 @@ public interface IBridgeInfoService extends IService<BridgeInfo> {
      * @return
      */
     Page<BridgeInfo> getAllBridgeInfo(long current, long size, String bridgeName);
+
+    /**
+     * 获取桥梁名称id键值对
+     * @return
+     */
+    List<BridgeNameIdMapVo> getBridgeNameIdMap();
+
+    /**
+     * 根据桥梁名称模糊查询桥梁id
+     * @param bridgeName
+     * @return
+     */
+    List<BridgeNameIdMapVo> getVagueBridgeNameIdMap(String bridgeName);
 }

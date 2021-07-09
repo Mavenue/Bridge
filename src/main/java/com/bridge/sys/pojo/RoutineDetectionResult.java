@@ -25,10 +25,10 @@ public class RoutineDetectionResult implements Serializable {
     @ApiModelProperty(value = "日常检测项id", required = true)
     private Integer detectionItemId;
 
-    @ApiModelProperty(value = "桥梁id", required = true)
+    @ApiModelProperty(value = "桥梁id", required = false)
     private String bridgeId;
 
-    @ApiModelProperty(value = "检测日期", required = true)
+    @ApiModelProperty(value = "检测日期", required = false)
     private LocalDate routineDetectionDate;
 
     @ApiModelProperty(value = "是否完好", required = true)

@@ -6,15 +6,15 @@ import com.bridge.common.utils.RespBean;
 import com.bridge.common.utils.UserUtil;
 import com.bridge.sys.pojo.BridgeInfo;
 import com.bridge.sys.mapper.BridgeInfoMapper;
+import com.bridge.sys.pojo.vo.BridgeNameIdMapVo;
 import com.bridge.sys.service.IBridgeInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -85,5 +85,24 @@ public class BridgeInfoServiceImpl extends ServiceImpl<BridgeInfoMapper, BridgeI
     public Page<BridgeInfo> getAllBridgeInfo(long current, long size, String bridgeName) {
         return bridgeInfoMapper.selectPage(new Page<BridgeInfo>(current, size, bridgeInfoMapper.selectCount(null)),
                 new QueryWrapper<BridgeInfo>().like(bridgeName != null && !bridgeName.equals(""), "bridge_name", bridgeName));
+    }
+
+    /**
+     * 获取桥梁名称id键值对
+     * @return
+     */
+    @Override
+    public List<BridgeNameIdMapVo> getBridgeNameIdMap() {
+        return bridgeInfoMapper.getBridgeNameIdMap();
+    }
+
+    /**
+     * 根据桥梁名称模糊查询桥梁id
+     * @param bridgeName
+     * @return
+     */
+    @Override
+    public List<BridgeNameIdMapVo> getVagueBridgeNameIdMap(String bridgeName) {
+        return bridgeInfoMapper.getVagueBridgeNameIdMap(bridgeName);
     }
 }

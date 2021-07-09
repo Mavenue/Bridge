@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import java.util.Collection;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -24,6 +25,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @ApiModel(value="User对象", description="")
+@TableName(value = "`user`")
 public class User implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 1L;

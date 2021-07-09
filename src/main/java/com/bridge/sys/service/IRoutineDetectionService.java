@@ -1,9 +1,13 @@
 package com.bridge.sys.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bridge.common.utils.RespBean;
 import com.bridge.sys.pojo.RoutineDetection;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bridge.sys.pojo.dto.RoutineDetectionResultsDto;
+import com.bridge.sys.pojo.vo.RoutineDetectionHistoryVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,4 +19,12 @@ import com.bridge.sys.pojo.dto.RoutineDetectionResultsDto;
  */
 public interface IRoutineDetectionService extends IService<RoutineDetection> {
 
+    /**
+     * 根据桥梁id分页获取该桥梁的所有日常监测记录信息
+     * @param current
+     * @param size
+     * @param bridgeId
+     * @return
+     */
+    Page<RoutineDetectionHistoryVo> getRoutineDetectionHistoryByBridgeId(Long current, Long size, String bridgeId);
 }

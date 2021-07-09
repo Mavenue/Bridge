@@ -2,7 +2,10 @@ package com.bridge.sys.pojo;
 
 import java.time.LocalDate;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,13 +24,21 @@ public class BridgeDeckDetectionResult implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "桥梁id")
     private String bridgeId;
 
+    @ApiModelProperty(value = "定期检测日期")
     private LocalDate periodicDetectionDate;
 
+    @ApiModelProperty(value = "桥面系损坏类型id", required = true)
     private Integer bridgeDeckDamageTypeId;
 
+    @ApiModelProperty(value = "扣分值", required = true)
     private Integer bridgeDeckDeduction;
+
+    @ApiModelProperty(value = "桥面系构件权重", required = true)
+    @TableField(exist = false)
+    private Double weight;
 
 
 }

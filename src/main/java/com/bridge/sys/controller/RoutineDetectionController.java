@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bridge.common.utils.RespBean;
 import com.bridge.sys.pojo.RoutineDetectionItem;
 import com.bridge.sys.pojo.dto.RoutineDetectionResultsDto;
+import com.bridge.sys.pojo.vo.RoutineDetectionHistoryVo;
 import com.bridge.sys.service.IRoutineDetectionService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,12 @@ import java.util.List;
 @RequestMapping("/routine-detection")
 public class RoutineDetectionController {
 
+    @Autowired
+    private IRoutineDetectionService routineDetectionService;
 
+    @ApiOperation(value = "根据桥梁id分页获取该桥梁的所有日常监测记录信息")
+    @GetMapping(value = "/history/{current}/{size}/{bridgeId}")
+    public Page<RoutineDetectionHistoryVo> getRoutineDetectionHistoryByBridgeId(@PathVariable Long current, @PathVariable Long size, @PathVariable String bridgeId) {
+        return routineDetectionService.getRoutineDetectionHistoryByBridgeId(current, size, bridgeId);
+    }
 }

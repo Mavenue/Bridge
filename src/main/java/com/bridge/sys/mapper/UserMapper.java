@@ -15,7 +15,17 @@ import com.bridge.sys.pojo.dto.UserDto;
  */
 public interface UserMapper extends BaseMapper<User> {
 
+    /**
+     * 添加用户
+     * @param userDto
+     * @return
+     */
     Integer addUser(UserDto userDto);
 
+    /**
+     * 更改用户权限
+     * @param updateAuthUserDto
+     * @return
+     */
     Integer updateUserAuth(UpdateAuthUserDto updateAuthUserDto);
 }

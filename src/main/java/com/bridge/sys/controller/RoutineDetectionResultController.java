@@ -32,10 +32,4 @@ public class RoutineDetectionResultController {
     public RespBean insertRoutineDetectionResults(@RequestBody RoutineDetectionResultsDto routineDetectionResultsDto, Principal principal) {
         return routineDetectionResultServiceService.insertRoutineDetectionResults(routineDetectionResultsDto, principal);
     }
-
-//    @ApiOperation(value = "分页获取所有桥梁日常检测信息")
-//    @GetMapping(value = "/all-info/{current}/{size}")
-//    public Page<T> getAllRoutineDetectionResults(@PathVariable long current, @PathVariable long size) {
-//
-//    }
 }

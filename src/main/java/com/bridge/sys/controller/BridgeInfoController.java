@@ -4,12 +4,14 @@ package com.bridge.sys.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bridge.common.utils.RespBean;
 import com.bridge.sys.pojo.BridgeInfo;
+import com.bridge.sys.pojo.vo.BridgeNameIdMapVo;
 import com.bridge.sys.service.IBridgeInfoService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 /**
  * <p>
@@ -44,5 +46,18 @@ public class BridgeInfoController {
     public RespBean submitBridgeInfo(@RequestBody BridgeInfo bridgeInfo, Principal principal) {
         return bridgeInfoService.submitBridgeInfo(bridgeInfo, principal);
     }
+
+    @ApiOperation(value = "获取桥梁名称id键值对")
+    @GetMapping(value = "/bridge-name-id-map")
+    public List<BridgeNameIdMapVo> getBridgeNameIdMap() {
+        return bridgeInfoService.getBridgeNameIdMap();
+    }
+
+    @ApiOperation(value = "根据桥梁名称模糊查询桥梁id")
+    @GetMapping(value = "/vague-name-id/{bridgeName}")
+    public List<BridgeNameIdMapVo> getVagueBridgeNameIdMap(@PathVariable String bridgeName) {
+        return bridgeInfoService.getVagueBridgeNameIdMap(bridgeName);
+    }
+
 
 }

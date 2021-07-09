@@ -14,4 +14,37 @@
         bridge_id, routine_detection_date, user_id
     </sql>
 
+    <select id="getRoutineDetectionHistoryByBridgeId" resultMap="routineDetectionHistory">
+        select
+            rd.routine_detection_date, user.username, rd.bridge_id
+        from
+            routine_detection as rd, user
+        where
+            rd.bridge_id = #{bridgeId} and rd.user_id = user.user_id;
+    </select>
+
+    <resultMap id="routineDetectionHistory" type="routineDetectionHistoryVo">
+        <result column="routine_detection_date" property="routineDetectionDate"/>
+        <result column="username" property="username"/>
+        <collection property="historyResultsVos" column="{bridgeId=bridge_id, routineDetectionDate=routine_detection_date}"
+                    ofType="routineDetectionHistoryResultsVo" select="getHistoryItems">
+            <result column="detection_item" property="detectionItem"/>
+            <result column="is_completion" property="isCompletion"/>
+            <result column="damage_type" property="damageType"/>
+            <result column="damage_degree" property="damageDegree"/>
+            <result column="damage_location" property="damageLocation"/>
+            <result column="remark" property="remark"/>
+        </collection>
+    </resultMap>
+
+    <select id="getHistoryItems" resultType="routineDetectionHistoryResultsVo">
+        select
+            rdi.detection_item, rdr.is_completion, rdr.damage_type, rdr.damage_location, rdr.damage_degree, rdr.remark
+        from
+            routine_detection_result as rdr, routine_detection_item as rdi
+        where
+            rdr.bridge_id = #{bridgeId} and rdr.routine_detection_date = #{routineDetectionDate}
+          and rdr.detection_item_id = rdi.detection_item_id;
+    </select>
+
 </mapper>
