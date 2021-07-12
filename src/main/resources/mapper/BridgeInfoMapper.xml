@@ -47,12 +47,13 @@
     </sql>
 
     <select id="getBridgeNameIdMap" resultType="bridgeNameIdMapVo">
-        select bridge_name as bridgeName, bridge_id as bridgeId from bridge_info;
+        select bridge_name as bridgeName, bridge_id as bridgeId from bridge_info
+        where deleted = false;
     </select>
 
     <select id="getVagueBridgeNameIdMap" resultType="bridgeNameIdMapVo">
         select bridge_name as bridgeName, bridge_id as bridgeId from bridge_info
-        where bridge_name like "%"#{bridgeName}"%";
+        where bridge_name like "%"#{bridgeName}"%" and deleted = false;
     </select>
 
     <select id="getBridgeSpanNumById" resultType="int">
@@ -64,4 +65,12 @@
         select structure_id from bridge_info
         where bridge_id = #{bridgeId};
     </select>
+
+    <update id="recoverBridgeInfo" parameterType="string">
+        update bridge_info set deleted = false where bridge_id = #{bridgeId};
+    </update>
+
+    <update id="deleteBridgeInfoLogical" parameterType="string">
+        update bridge_info set deleted = true where bridge_id = #{bridgeId};
+    </update>
 </mapper>

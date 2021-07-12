@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,18 +34,18 @@ public class RoutineDetectionServiceImpl extends ServiceImpl<RoutineDetectionMap
 
     /**
      * 根据桥梁id分页获取该桥梁的所有日常监测记录信息
-     * @param current
-     * @param size
      * @param bridgeId
      * @return
      */
     @Override
-    public Page<RoutineDetectionHistoryVo> getRoutineDetectionHistoryByBridgeId(Long current, Long size, String bridgeId) {
-        List<RoutineDetectionHistoryVo> routineDetectionHistory = routineDetectionMapper.getRoutineDetectionHistoryByBridgeId(bridgeId);
-        Page<RoutineDetectionHistoryVo> routineDetectionHistoryVoPage = new Page<>(current, size);
-        Integer total = routineDetectionMapper.selectCount(new QueryWrapper<RoutineDetection>().eq("bridge_id", bridgeId));
-        routineDetectionHistoryVoPage.setTotal(total);
-        routineDetectionHistoryVoPage.setRecords(routineDetectionHistory);
-        return routineDetectionHistoryVoPage;
+    public List<RoutineDetectionHistoryVo> getRoutineDetectionHistoryByBridgeId(String bridgeId) {
+        List<RoutineDetectionHistoryVo> routineDetectionHistory;
+        try {
+            routineDetectionHistory = routineDetectionMapper.getRoutineDetectionHistoryByBridgeId(bridgeId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return routineDetectionHistory;
     }
 }

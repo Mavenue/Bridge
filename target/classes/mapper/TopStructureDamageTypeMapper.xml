@@ -16,4 +16,26 @@
         top_structure_damage_type_id, top_structure_component_id, top_structure_damage_type_name, top_structure_damage_type_definition, top_structure_damage_type_explanation
     </sql>
 
+    <select id="getTopStructureDamageTypeVosById" resultMap="damageTypeVo">
+        select top_structure_damage_type_id, top_structure_damage_type_name, top_structure_damage_type_explanation
+        from top_structure_damage_type
+        where top_structure_component_id = #{topStructureComponentId};
+    </select>
+
+    <resultMap id="damageTypeVo" type="topStructureDamageTypeVo">
+        <result column="top_structure_damage_type_id" property="topStructureDamageTypeId"/>
+        <result column="top_structure_damage_type_name" property="topStructureDamageTypeName"/>
+        <result column="top_structure_damage_type_explanation" property="topStructureDamageTypeExplanation"/>
+        <collection property="topStructureDamageClassVos" column="top_structure_damage_type_id" javaType="ArrayList" ofType="topStructureDamageClassVo" select="getDamageClasses">
+            <result column="top_structure_damage_class_name" property="topStructureDamageClassName" />
+            <result column="top_structure_class_deduction" property="topStructureClassDeduction"/>
+        </collection>
+    </resultMap>
+
+    <select id="getDamageClasses" resultType="topStructureDamageClassVo">
+        select top_structure_class_deduction, top_structure_damage_class_name
+        from top_structure_damage_class
+        where top_structure_damage_type_id = #{id};
+    </select>
+
 </mapper>

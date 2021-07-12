@@ -56,4 +56,20 @@ public interface IBridgeInfoService extends IService<BridgeInfo> {
      * @return
      */
     List<BridgeNameIdMapVo> getVagueBridgeNameIdMap(String bridgeName);
+
+    /**
+     * 根据桥梁id逻辑启用或弃用桥梁资料卡
+     * @param bridgeId
+     * @param principal
+     * @return
+     */
+    RespBean deleteOrRecoverBridgeInfo(String bridgeId, Principal principal);
+
+    /**
+     * 修改桥梁资料卡
+     * @param bridgeInfo
+     * @param principal
+     * @return
+     */
+    RespBean updateBridgeInfo(BridgeInfo bridgeInfo, Principal principal);
 }

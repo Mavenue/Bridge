@@ -14,9 +14,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface BridgeDeckComponentTypeMapper extends BaseMapper<BridgeDeckComponentType> {
 
     /**
-     * 根据桥面系构件类型id获取构建名
+     * 根据桥面系构件类型id获取构件名
      * @param bridgeDeckComponentId
      * @return
      */
-    String getComponentTypeNameById(String bridgeDeckComponentId);
+    String getBridgeDeckComponentTypeNameById(String bridgeDeckComponentId);
 }

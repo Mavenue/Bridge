@@ -1,16 +1,18 @@
 package com.bridge.sys.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.bridge.sys.mapper.BridgeDeckDamageTypeMapper;
 import com.bridge.sys.mapper.BridgeInfoMapper;
 import com.bridge.sys.pojo.PeriodicDetectionConf;
 import com.bridge.sys.mapper.PeriodicDetectionConfMapper;
+import com.bridge.sys.pojo.vo.BottomStructureDetectionVo;
 import com.bridge.sys.pojo.vo.BridgeDeckDetectionVo;
 import com.bridge.sys.pojo.vo.PeriodicDetectionVo;
 import com.bridge.sys.pojo.vo.TopStructureDetectionVo;
+import com.bridge.sys.service.IBottomComponentTypeService;
 import com.bridge.sys.service.IBridgeDeckComponentTypeService;
 import com.bridge.sys.service.IPeriodicDetectionConfService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bridge.sys.service.ITopComponentTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +38,12 @@ public class PeriodicDetectionConfServiceImpl extends ServiceImpl<PeriodicDetect
 
     @Autowired
     private IBridgeDeckComponentTypeService bridgeDeckComponentTypeService;
+
+    @Autowired
+    private ITopComponentTypeService topComponentTypeService;
+
+    @Autowired
+    private IBottomComponentTypeService bottomComponentTypeService;
 
 
     /**
@@ -63,6 +71,11 @@ public class PeriodicDetectionConfServiceImpl extends ServiceImpl<PeriodicDetect
             periodicDetectionVo.setTopStructureDetectionVos(getTopStructureDetections(topStructureConfig));
 
 
+            List<PeriodicDetectionConf> bottomStructurePierConfig = detectionConfMapper.getBottomStructurePierConfig(structureId);
+            periodicDetectionVo.setBottomStructurePierDetectionVos(getBottomStructureDetections(bottomStructurePierConfig));
+
+            List<PeriodicDetectionConf> bottomStructureAbutmentConfig = detectionConfMapper.getBottomStructureAbutmentConfig(structureId);
+            periodicDetectionVo.setBottomStructureAbutmentDetectionVos(getBottomStructureDetections(bottomStructureAbutmentConfig));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -71,12 +84,43 @@ public class PeriodicDetectionConfServiceImpl extends ServiceImpl<PeriodicDetect
     }
 
     /**
+     * 根据下部结构的配置项获取下部结构所有检测内容
+     * @param bottomStructureConfig
+     * @return
+     */
+    private List<BottomStructureDetectionVo> getBottomStructureDetections(List<PeriodicDetectionConf> bottomStructureConfig) {
+        List<BottomStructureDetectionVo> bottomStructurePierDetectionVos = new ArrayList<>();
+        try {
+            bottomStructureConfig.forEach(config -> {
+                BottomStructureDetectionVo bottomStructurePierDetectionVo = bottomComponentTypeService.getBottomStructurePierDetectionVo(config.getBottomStructureComponentId());
+                bottomStructurePierDetectionVo.setWeight(config.getWeight().doubleValue());
+                bottomStructurePierDetectionVos.add(bottomStructurePierDetectionVo);
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return bottomStructurePierDetectionVos;
+    }
+
+    /**
      * 根据上部结构的配置项获取上部结构所有检测内容
      * @param topStructureConfig
      * @return
      */
     private List<TopStructureDetectionVo> getTopStructureDetections(List<PeriodicDetectionConf> topStructureConfig) {
-        return null;
+        List<TopStructureDetectionVo> topStructureDetectionVos = new ArrayList<>();
+        try {
+            topStructureConfig.forEach(config -> {
+                TopStructureDetectionVo topStructureDetectionVo = topComponentTypeService.getTopStructureDetectionVo(config.getTopStructureComponentId());
+                topStructureDetectionVo.setWeight(config.getWeight().doubleValue());
+                topStructureDetectionVos.add(topStructureDetectionVo);
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return topStructureDetectionVos;
     }
 
     /**

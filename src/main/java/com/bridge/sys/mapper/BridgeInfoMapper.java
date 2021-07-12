@@ -42,4 +42,18 @@ public interface BridgeInfoMapper extends BaseMapper<BridgeInfo> {
      * @return
      */
     Integer getStructureIdByBridgeId(String bridgeId);
+
+    /**
+     * 启用桥梁资料卡
+     * @param bridgeId
+     * @return
+     */
+    int recoverBridgeInfo(String bridgeId);
+
+    /**
+     * 弃用桥梁资料卡
+     * @param bridgeId
+     * @return
+     */
+    int deleteBridgeInfoLogical(String bridgeId);
 }

@@ -21,5 +21,5 @@ public class BottomStructureDetectionVo {
     private Double weight;
 
     @ApiModelProperty(value = "下部构件对应的损坏类型")
-    private List<BottomStructureDamageTypeVo> bottomStructureDamageTypeVoList;
+    private List<BottomStructureDamageTypeVo> bottomStructureDamageTypeVos;
 }

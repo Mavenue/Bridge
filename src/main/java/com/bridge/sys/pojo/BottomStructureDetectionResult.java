@@ -39,8 +39,4 @@ public class BottomStructureDetectionResult implements Serializable {
     @ApiModelProperty(value = "扣分值", required = true)
     private Integer bottomStructureDeduction;
 
-    @ApiModelProperty(value = "下部构件权重", required = true)
-    @TableField(exist = false)
-    private Double weight;
-
 }

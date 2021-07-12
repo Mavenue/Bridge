@@ -7,6 +7,7 @@ import com.bridge.sys.pojo.User;
 import com.bridge.sys.pojo.dto.LoginDto;
 import com.bridge.sys.pojo.dto.UpdateAuthUserDto;
 import com.bridge.sys.pojo.dto.UserDto;
+import com.bridge.sys.pojo.vo.Router;
 import com.bridge.sys.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 /**
  * <p>
@@ -68,8 +70,8 @@ public class UserController {
 
     @ApiOperation(value = "添加用户")
     @PostMapping(value = "/register")
-    public RespBean addUser(@RequestBody UserDto userDto) {
-        return userService.addUser(userDto);
+    public RespBean addUser(@RequestBody UserDto userDto, Principal principal) {
+        return userService.addUser(userDto, principal);
     }
 
     @ApiOperation(value = "用户注销")
@@ -90,5 +92,11 @@ public class UserController {
             user.setPassword(null);
         }
         return user;
+    }
+
+    @ApiOperation(value = "根据当前登录用户动态获取路由")
+    @GetMapping(value = "/router")
+    public List<Router> getRouter(Principal principal) {
+        return userService.getRouter(principal);
     }
 }

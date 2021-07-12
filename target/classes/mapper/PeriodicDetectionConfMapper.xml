@@ -17,4 +17,16 @@
         periodic_detection_item_id, structure_id, weight, bridge_deck_component_id, top_structure_component_id, bottom_structure_component_id
     </sql>
 
+    <select id="getBottomStructurePierConfig" resultMap="BaseResultMap">
+        select pdc.* from periodic_detection_conf as pdc, bottom_component_type as bct
+        where pdc.bottom_structure_component_id = bct.bottom_structure_component_id and bct.part = '桥墩'
+        and pdc.structure_id = #{structureId};
+    </select>
+
+    <select id="getBottomStructureAbutmentConfig" resultMap="BaseResultMap">
+        select pdc.* from periodic_detection_conf as pdc, bottom_component_type as bct
+        where pdc.bottom_structure_component_id = bct.bottom_structure_component_id and bct.part = '桥台'
+        and pdc.structure_id = #{structureId};
+    </select>
+
 </mapper>

@@ -34,5 +34,7 @@ public class Nav implements Serializable {
 
     private String path;
 
+    private String title;
+
     private String parent;
 }

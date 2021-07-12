@@ -4,10 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bridge.common.utils.JwtUtil;
 import com.bridge.common.utils.RespBean;
+import com.bridge.sys.mapper.NavMapper;
 import com.bridge.sys.pojo.User;
 import com.bridge.sys.mapper.UserMapper;
 import com.bridge.sys.pojo.dto.UpdateAuthUserDto;
 import com.bridge.sys.pojo.dto.UserDto;
+import com.bridge.sys.pojo.vo.Router;
 import com.bridge.sys.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,6 +39,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private NavMapper navMapper;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -66,7 +72,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (!userDetails.isEnabled()) {
             return RespBean.error("账号被禁用，请联系管理员");
         }
-
         UsernamePasswordAuthenticationToken authenticationToken = new
                 UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
@@ -85,33 +90,42 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      */
     @Override
     public User getUserInfoByUsername(String username) {
-
-        User user = userMapper.selectOne(new QueryWrapper<User>().eq("username", username));
+        User user = null;
+        try {
+            user = userMapper.selectOne(new QueryWrapper<User>().eq("username", username));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return user;
     }
 
     /**
      * 添加用户
      * @param userDto
+     * @param principal
      * @return
      */
     @Override
-    public RespBean addUser(UserDto userDto) {
-        Integer existTheUser = userMapper.selectCount(new QueryWrapper<User>().eq("username", userDto.getUsername()));
-        if (existTheUser > 0) {
-            return RespBean.error("用户名已存在");
-        }
-        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
-        userDto.setPassword(encodedPassword);
+    public RespBean addUser(UserDto userDto, Principal principal) {
         try {
-            if (userMapper.addUser(userDto) > 0) {
-                return RespBean.success("添加用户成功");
+            Integer existTheUser = userMapper.selectCount(new QueryWrapper<User>().eq("username", userDto.getUsername()));
+            if (existTheUser > 0) {
+                return RespBean.error("用户名已存在");
+            }
+            User user = userMapper.selectOne(new QueryWrapper<User>().eq("username", principal.getName()));
+            if (user.getType() != 0) {
+                return RespBean.error("添加用户失败，权限不足");
+            }
+            String encodedPassword = passwordEncoder.encode(userDto.getPassword());
+            userDto.setPassword(encodedPassword);
+            if (userMapper.addUser(userDto) <= 0) {
+                return RespBean.error("添加用户失败");
             }
         } catch (Exception e) {
             e.printStackTrace();
             return RespBean.error("添加用户失败");
         }
-        return RespBean.error("添加用户失败");
+        return RespBean.success("添加用户成功");
     }
 
     /**
@@ -120,8 +134,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      */
     @Override
     public Page<User> getAllUserInfo(long current, long size) {
-        return userMapper.selectPage(new Page<User>(current, size, userMapper.selectCount(null)),
-                new QueryWrapper<User>(null));
+        Page<User> userPage = null;
+        try {
+            userPage = userMapper.selectPage(new Page<User>(current, size, userMapper.selectCount(null)),
+                    new QueryWrapper<User>(null));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userPage;
     }
 
     /**
@@ -136,26 +156,27 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return RespBean.error("权限不足");
         }
         String currentUsername = principal.getName();
-        User currentUserInfo = userMapper.selectOne(new QueryWrapper<User>().eq("username", currentUsername));
-        User updateAuthUser = userMapper.selectOne(new QueryWrapper<User>().eq("user_id", updateAuthUserDto.getUserId()));
-        if (currentUserInfo == null || updateAuthUser == null) {
-            return RespBean.error("修改用户权限失败");
-        }
-        if (currentUserInfo.getType() != 0) {
-            return RespBean.error("权限不足");
-        } else if (updateAuthUser.getType() == 0) {
-            return RespBean.error("不能修改系统管理员的权限");
-        } else if (updateAuthUserDto.getType() == 0) {
-            return RespBean.error("不能修改将用户权限修改为系统管理员");
-        }
         try {
-            if (userMapper.updateUserAuth(updateAuthUserDto) > 0) {
-                return RespBean.success("修改用户权限成功");
+            User currentUserInfo = userMapper.selectOne(new QueryWrapper<User>().eq("username", currentUsername));
+            User updateAuthUser = userMapper.selectOne(new QueryWrapper<User>().eq("user_id", updateAuthUserDto.getUserId()));
+            if (currentUserInfo == null || updateAuthUser == null) {
+                return RespBean.error("修改用户权限失败");
+            }
+            if (currentUserInfo.getType() != 0) {
+                return RespBean.error("权限不足");
+            } else if (updateAuthUser.getType() == 0) {
+                return RespBean.error("不能修改系统管理员的权限");
+            } else if (updateAuthUserDto.getType() == 0) {
+                return RespBean.error("不能修改将用户权限修改为系统管理员");
+            }
+            if (userMapper.updateUserAuth(updateAuthUserDto) <= 0) {
+                return RespBean.error("修改用户权限失败");
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return RespBean.error("修改用户权限失败");
         }
-        return RespBean.success("修改用户权限失败");
+        return RespBean.success("修改用户权限成功");
     }
 
     /**
@@ -165,8 +186,34 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      */
     @Override
     public User getUserInfoById(Integer userId) {
-        return userMapper.selectOne(new QueryWrapper<User>().eq("user_id", userId));
+        User user = null;
+        try {
+            user = userMapper.selectOne(new QueryWrapper<User>().eq("user_id", userId));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
+    /**
+     * 根据当前登录用户动态获取路由
+     * @param principal
+     * @return
+     */
+    @Override
+    public List<Router> getRouter(Principal principal) {
+        if (principal == null) {
+            return null;
+        }
+        List<Router> router = null;
+        try {
+            Integer type = userMapper.selectOne(new QueryWrapper<User>()
+                    .eq("username", principal.getName())).getType();
+            router = navMapper.getRouterByUserType(type);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return router;
+    }
 
 }

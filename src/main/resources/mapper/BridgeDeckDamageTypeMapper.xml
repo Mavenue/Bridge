@@ -16,16 +16,16 @@
         bridge_deck_damage_type_id, bridge_deck_component_id, bridge_deck_damage_type_name, bridge_deck_damage_type_definition, bridge_deck_damage_type_explanation
     </sql>
 
-    <select id="getDamageTypeVos" resultMap="damageTypeVo">
+    <select id="getBridgeDeckDamageTypeVos" resultMap="damageTypeVo">
         select bridge_deck_damage_type_id, bridge_deck_damage_type_name, bridge_deck_damage_type_explanation
         from bridge_deck_damage_type
         where bridge_deck_component_id = #{bridgeDeckComponentId};
     </select>
 
     <resultMap id="damageTypeVo" type="bridgeDeckDamageTypeVo">
-        <result column="bridge_deck_damage_type_id" property="bottomStructureDamageTypeId"/>
-        <result column="bridge_deck_damage_type_name" property="bottomStructureDamageTypeName"/>
-        <result column="bridge_deck_damage_type_explanation" property="bottomStructureDamageTypeExplanation"/>
+        <result column="bridge_deck_damage_type_id" property="bridgeDeckDamageTypeId"/>
+        <result column="bridge_deck_damage_type_name" property="bridgeDeckDamageTypeName"/>
+        <result column="bridge_deck_damage_type_explanation" property="bridgeDeckDamageTypeExplanation"/>
         <collection property="bridgeDeckDamageClassVos" column="bridge_deck_damage_type_id" javaType="ArrayList" ofType="bridgeDeckDamageClassVo" select="getDamageClasses">
             <result column="bridge_deck_damage_class_name" property="bridgeDeckDamageClassName" />
             <result column="bridge_deck_class_deduction" property="bridgeDeckClassDeduction"/>

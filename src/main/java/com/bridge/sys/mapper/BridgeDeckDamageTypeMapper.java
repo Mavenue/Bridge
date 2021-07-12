@@ -22,5 +22,5 @@ public interface BridgeDeckDamageTypeMapper extends BaseMapper<BridgeDeckDamageT
      * @param bridgeDeckComponentId
      * @return
      */
-    List<BridgeDeckDamageTypeVo> getDamageTypeVos(String bridgeDeckComponentId);
+    List<BridgeDeckDamageTypeVo> getBridgeDeckDamageTypeVos(String bridgeDeckComponentId);
 }

@@ -43,10 +43,10 @@ public class BridgeDeckComponentTypeServiceImpl extends ServiceImpl<BridgeDeckCo
     public BridgeDeckDetectionVo getBridgeDeckDetectionVo(String bridgeDeckComponentId) {
         BridgeDeckDetectionVo bridgeDeckDetectionVo = new BridgeDeckDetectionVo();
         try {
-            String bridgeDeckComponentName = bridgeDeckComponentTypeMapper.getComponentTypeNameById(bridgeDeckComponentId);
+            String bridgeDeckComponentName = bridgeDeckComponentTypeMapper.getBridgeDeckComponentTypeNameById(bridgeDeckComponentId);
             bridgeDeckDetectionVo.setBridgeDeckComponentName(bridgeDeckComponentName);
 
-            List<BridgeDeckDamageTypeVo> bridgeDeckDamageTypeVos =  bridgeDeckDamageTypeMapper.getDamageTypeVos(bridgeDeckComponentId);
+            List<BridgeDeckDamageTypeVo> bridgeDeckDamageTypeVos =  bridgeDeckDamageTypeMapper.getBridgeDeckDamageTypeVos(bridgeDeckComponentId);
             bridgeDeckDetectionVo.setBridgeDeckDamageTypeVos(bridgeDeckDamageTypeVos);
         } catch (Exception e) {
             e.printStackTrace();

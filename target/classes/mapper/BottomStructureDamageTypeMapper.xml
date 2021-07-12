@@ -16,4 +16,26 @@
         bottom_structure_damage_type_id, bottom_structure_component_id, bottom_structure_damage_type_name, bottom_structure_damage_type_definition, bottom_structure_damage_type_explanation
     </sql>
 
+    <select id="getBottomStructurePierDamageTypeVosById" resultMap="damageTypeVo">
+        select bottom_structure_damage_type_id, bottom_structure_damage_type_name, bottom_structure_damage_type_explanation
+        from bottom_structure_damage_type
+        where bottom_structure_component_id = #{bottomStructureComponentId};
+    </select>
+
+    <resultMap id="damageTypeVo" type="bottomStructureDamageTypeVo">
+        <result column="bottom_structure_damage_type_id" property="bottomStructureDamageTypeId" />
+        <result column="bottom_structure_damage_type_name" property="bottomStructureDamageTypeName" />
+        <result column="bottom_structure_damage_type_explanation" property="bottomStructureDamageTypeExplanation" />
+        <collection property="bottomStructureDamageClassVos" column="bottom_structure_damage_type_id" javaType="ArrayList" ofType="bottomStructureDamageClassVo" select="getDamageClasses">
+            <result column="bottom_structure_damage_class_name" property="bottomStructureDamageClassName" />
+            <result column="bottom_structure_class_deduction" property="bottomStructureClassDeduction"/>
+        </collection>
+    </resultMap>
+
+    <select id="getDamageClasses" resultType="bottomStructureDamageClassVo">
+        select bottom_structure_class_deduction, bottom_structure_damage_class_name
+        from bottom_structure_damage_class
+        where bottom_structure_damage_type_id = #{id};
+    </select>
+
 </mapper>

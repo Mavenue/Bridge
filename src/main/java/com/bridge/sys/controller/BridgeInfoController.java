@@ -40,7 +40,6 @@ public class BridgeInfoController {
         return bridgeInfoService.getBridgeInfoById(bridgeId);
     }
 
-
     @ApiOperation(value = "建立桥梁资料卡")
     @PostMapping()
     public RespBean submitBridgeInfo(@RequestBody BridgeInfo bridgeInfo, Principal principal) {
@@ -59,5 +58,15 @@ public class BridgeInfoController {
         return bridgeInfoService.getVagueBridgeNameIdMap(bridgeName);
     }
 
+    @ApiOperation(value = "根据桥梁id逻辑启用或弃用桥梁资料卡")
+    @DeleteMapping(value = "/{bridgeId}")
+    public RespBean deleteOrRecoverBridgeInfo(@PathVariable String bridgeId, Principal principal) {
+        return bridgeInfoService.deleteOrRecoverBridgeInfo(bridgeId, principal);
+    }
 
+    @ApiOperation(value = "修改桥梁资料卡")
+    @PutMapping(value = "/update")
+    public RespBean updateBridgeInfo(@RequestBody BridgeInfo bridgeInfo, Principal principal) {
+        return bridgeInfoService.updateBridgeInfo(bridgeInfo, principal);
+    }
 }

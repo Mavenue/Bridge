@@ -13,4 +13,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface BottomComponentTypeMapper extends BaseMapper<BottomComponentType> {
 
+    /**
+     * 根据下部结构构件id获取下部结构构件名
+     * @param bottomStructureComponentId
+     * @return
+     */
+    String getBottomStructurePierComponentNameById(String bottomStructureComponentId);
 }

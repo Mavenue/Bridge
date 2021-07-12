@@ -13,4 +13,10 @@
         top_structure_component_id, top_structure_component_name
     </sql>
 
+    <select id="getTopStructureComponentNameById" resultType="string">
+        select top_structure_component_name
+        from top_component_type
+        where top_structure_component_id = #{topStructureComponentId};
+    </select>
+
 </mapper>

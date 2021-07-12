@@ -30,8 +30,8 @@ public class RoutineDetectionController {
     private IRoutineDetectionService routineDetectionService;
 
     @ApiOperation(value = "根据桥梁id分页获取该桥梁的所有日常监测记录信息")
-    @GetMapping(value = "/history/{current}/{size}/{bridgeId}")
-    public Page<RoutineDetectionHistoryVo> getRoutineDetectionHistoryByBridgeId(@PathVariable Long current, @PathVariable Long size, @PathVariable String bridgeId) {
-        return routineDetectionService.getRoutineDetectionHistoryByBridgeId(current, size, bridgeId);
+    @GetMapping(value = "/history/{bridgeId}")
+    public List<RoutineDetectionHistoryVo> getRoutineDetectionHistoryByBridgeId(@PathVariable String bridgeId) {
+        return routineDetectionService.getRoutineDetectionHistoryByBridgeId(bridgeId);
     }
 }

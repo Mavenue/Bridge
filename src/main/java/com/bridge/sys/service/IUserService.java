@@ -6,8 +6,10 @@ import com.bridge.sys.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bridge.sys.pojo.dto.UpdateAuthUserDto;
 import com.bridge.sys.pojo.dto.UserDto;
+import com.bridge.sys.pojo.vo.Router;
 
 import java.security.Principal;
+import java.util.List;
 
 /**
  * <p>
@@ -38,9 +40,10 @@ public interface IUserService extends IService<User> {
     /**
      * 添加用户
      * @param userDto
+     * @param principal
      * @return
      */
-    RespBean addUser(UserDto userDto);
+    RespBean addUser(UserDto userDto, Principal principal);
 
     /**
      * 获取所有用户信息
@@ -62,4 +65,12 @@ public interface IUserService extends IService<User> {
      * @return
      */
     User getUserInfoById(Integer userId);
+
+
+    /**
+     * 根据当前登录用户动态获取路由
+     * @param principal
+     * @return
+     */
+    List<Router> getRouter(Principal principal);
 }

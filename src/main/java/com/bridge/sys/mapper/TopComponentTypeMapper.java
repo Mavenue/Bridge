@@ -13,4 +13,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface TopComponentTypeMapper extends BaseMapper<TopComponentType> {
 
+    /**
+     * 根据上部结构构件id获取上部结构构件名
+     * @param topStructureComponentId
+     * @return
+     */
+    String getTopStructureComponentNameById(String topStructureComponentId);
 }

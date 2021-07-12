@@ -39,8 +39,4 @@ public class TopStructureDetectionResult implements Serializable {
     @ApiModelProperty(value = "扣分值", required = true)
     private Integer topStructureDeduction;
 
-    @ApiModelProperty(value = "上部构件权重", required = true)
-    @TableField(exist = false)
-    private Double weight;
-
 }

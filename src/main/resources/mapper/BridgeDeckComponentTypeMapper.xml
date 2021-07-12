@@ -13,7 +13,7 @@
         bridge_deck_component_id, bridge_deck_component_name
     </sql>
 
-    <select id="getComponentTypeNameById" resultType="string">
+    <select id="getBridgeDeckComponentTypeNameById" resultType="string">
         select bridge_deck_component_name as bridgeDeckcomponentTypeName
         from bridge_deck_component_type where bridge_deck_component_id = #{bridgeDeckComponentId};
     </select>

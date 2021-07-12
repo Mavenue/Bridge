@@ -11,15 +11,15 @@ import java.util.List;
 @Accessors(chain = true)
 @ApiModel(value = "BridgeDeckDamageTypeVo对象")
 public class BridgeDeckDamageTypeVo {
-    @ApiModelProperty(value = "下部结构损坏类型id")
-    private Integer bottomStructureDamageTypeId;
+    @ApiModelProperty(value = "桥面系损坏类型id")
+    private Integer bridgeDeckDamageTypeId;
 
-    @ApiModelProperty(value = "下部结构损坏类型名")
-    private String bottomStructureDamageTypeName;
+    @ApiModelProperty(value = "桥面系损坏类型名")
+    private String bridgeDeckDamageTypeName;
 
-    @ApiModelProperty(value = "下部结构损坏类型说明")
-    private String bottomStructureDamageTypeExplanation;
+    @ApiModelProperty(value = "桥面系损坏类型说明")
+    private String bridgeDeckDamageTypeExplanation;
 
-    @ApiModelProperty(value = "下部结构损坏类型对应的等级")
+    @ApiModelProperty(value = "桥面系损坏类型对应的等级")
     private List<BridgeDeckDamageClassVo> bridgeDeckDamageClassVos;
 }

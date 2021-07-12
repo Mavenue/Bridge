@@ -14,4 +14,9 @@
         bottom_structure_component_id, bottom_structure_component_name, part
     </sql>
 
+    <select id="getBottomStructurePierComponentNameById" resultType="string">
+        select bottom_structure_component_name from bottom_component_type
+        where bottom_structure_component_id = #{bottomStructureComponentId};
+    </select>
+
 </mapper>

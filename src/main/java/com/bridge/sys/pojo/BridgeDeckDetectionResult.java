@@ -36,9 +36,4 @@ public class BridgeDeckDetectionResult implements Serializable {
     @ApiModelProperty(value = "扣分值", required = true)
     private Integer bridgeDeckDeduction;
 
-    @ApiModelProperty(value = "桥面系构件权重", required = true)
-    @TableField(exist = false)
-    private Double weight;
-
-
 }

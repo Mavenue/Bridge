@@ -25,4 +25,94 @@
         top_bci, top_bsi, bottom_bci, bottom_bsi, bridge_deck_bci, bridge_deck_bsi
     </sql>
 
+    <select id="getDetectionResultInfo" resultType="detectionResultInfo">
+        SELECT	bi.span_num as spanNum, pd.periodic_detection_date as periodicDetectionDate, u.username, pd.bridge_id as bridgeId
+        from periodic_detection as pd, `user` as u, bridge_info as bi
+        where pd.bridge_id = bi.bridge_id and u.user_id = pd.user_id and pd.bridge_id = #{bridgeId};
+    </select>
+
+    <select id="getBridgeDeckDetectionResult" resultMap="bridgeDeckDetectionResult">
+        select bridge_deck_component_name, bridge_deck_component_id,
+               #{resultInfo.periodicDetectionDate} as detection_date, #{resultInfo.bridgeId} as bridge_id
+        FROM bridge_deck_component_type
+        WHERE bridge_deck_component_id = #{bridgeDeckComponentId};
+    </select>
+
+    <resultMap id="bridgeDeckDetectionResult" type="bridgeDeckDetectionComponent">
+        <result column="bridge_deck_component_name" property="bridgeDeckComponentName"/>
+        <result column="bridge_deck_component_id" property="bridgeDeckComponentId"/>
+        <collection property="bridgeDeckDetectionResultVos"
+                    column="{componentId=bridge_deck_component_id, detectionDate=detection_date, bridgeId=bridge_id}"
+                    javaType="ArrayList" ofType="bridgeDeckDetectionResultVo" select="getBridgeDeckDamageTypeResult">
+            <result property="bridgeDeckDamageTypeName" column="bridge_deck_damage_type_name"/>
+            <result property="bridgeDeckDeduction" column="bridge_deck_deduction"/>
+        </collection>
+    </resultMap>
+
+    <select id="getBridgeDeckDamageTypeResult" resultType="bridgeDeckDetectionResultVo">
+        select	dt.bridge_deck_damage_type_name, dr.bridge_deck_deduction
+        from bridge_deck_damage_type as dt, bridge_deck_detection_result as dr
+        where dt.bridge_deck_damage_type_id = dr.bridge_deck_damage_type_id
+          and dt.bridge_deck_component_id = #{componentId} and dr.bridge_id = #{bridgeId}
+          and dr.periodic_detection_date = #{detectionDate};
+    </select>
+
+    <select id="getTopStructureDetectionResult" resultMap="topStructureDetectionResult">
+        select top_structure_component_id, top_structure_component_name,
+               #{spanNum} as span_num,
+               #{resultInfo.periodicDetectionDate} as detection_date, #{resultInfo.bridgeId} as bridge_id
+        from top_component_type
+        where top_structure_component_id = #{topStructureComponentId};
+    </select>
+
+    <resultMap id="topStructureDetectionResult" type="topStructureDetectionComponent">
+        <result column="top_structure_component_name" property="topStructureComponentName"/>
+        <result column="top_structure_component_id" property="topStructureComponentId"/>
+        <collection property="topStructureDetectionResultVos"
+                    column="{spanNum=span_num, componentId=top_structure_component_id, detectionDate=detection_date, bridgeId=bridge_id}"
+                    javaType="ArrayList" ofType="topStructureDetectionResultVo"
+                    select="getTopStructureDamageTypeResult">
+            <result column="top_structure_damage_type_name" property="topStructureDamageTypeName"/>
+            <result column="top_structure_deduction" property="topStructureDeduction"/>
+        </collection>
+    </resultMap>
+
+    <select id="getTopStructureDamageTypeResult" resultType="topStructureDetectionResultVo">
+        select dt.top_structure_damage_type_name, dr.top_structure_deduction
+        from top_structure_damage_type as dt, top_structure_detection_result as dr
+        where dt.top_structure_component_id = #{componentId}
+          and dt.top_structure_damage_type_id = dr.top_structure_damage_type_id
+          and dr.bridge_id = #{bridgeId} and dr.periodic_detection_date = #{detectionDate}
+          and dr.top_structure_span_num = #{spanNum};
+    </select>
+
+    <select id="getBottomStructureDetectionResult" resultMap="bottomStructureDetectionResult">
+        select bottom_structure_component_id, bottom_structure_component_name,
+               #{spanNum} as span_num,
+            #{resultInfo.periodicDetectionDate} as detection_date, #{resultInfo.bridgeId} as bridge_id
+        from bottom_component_type
+        where bottom_structure_component_id = #{bottomStructureComponentId};
+    </select>
+
+    <resultMap id="bottomStructureDetectionResult" type="bottomStructureDetectionComponent">
+        <result column="bottom_structure_component_name" property="bottomStructureComponentName"/>
+        <result column="bottom_structure_component_id" property="bottomStructureComponentId"/>
+        <collection property="bottomStructureDetectionResultVos"
+                    column="{spanNum=span_num, componentId=bottom_structure_component_id, detectionDate=detection_date, bridgeId=bridge_id}"
+                    javaType="ArrayList" ofType="bottomStructureDetectionResultVo"
+                    select="getBottomStructureDamageTypeResult">
+            <result column="bottom_structure_damage_type_name" property="bottomStructureDamageTypeName"/>
+            <result column="bottom_structure_deduction" property="bottomStructureDeduction"/>
+        </collection>
+    </resultMap>
+
+    <select id="getBottomStructureDamageTypeResult" resultType="bottomStructureDetectionResultVo">
+        select dt.bottom_structure_damage_type_name, dr.bottom_structure_deduction
+        from bottom_structure_damage_type as dt, bottom_structure_detection_result as dr
+        where dt.bottom_structure_component_id = #{componentId}
+          and dt.bottom_structure_damage_type_id = dr.bottom_structure_damage_type_id
+          and dr.bridge_id = #{bridgeId} and dr.periodic_detection_date = #{detectionDate}
+          and dr.bottom_structure_span_num = #{spanNum};
+    </select>
+
 </mapper>

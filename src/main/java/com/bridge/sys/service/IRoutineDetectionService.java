@@ -21,10 +21,8 @@ public interface IRoutineDetectionService extends IService<RoutineDetection> {
 
     /**
      * 根据桥梁id分页获取该桥梁的所有日常监测记录信息
-     * @param current
-     * @param size
      * @param bridgeId
      * @return
      */
-    Page<RoutineDetectionHistoryVo> getRoutineDetectionHistoryByBridgeId(Long current, Long size, String bridgeId);
+    List<RoutineDetectionHistoryVo> getRoutineDetectionHistoryByBridgeId(String bridgeId);
 }

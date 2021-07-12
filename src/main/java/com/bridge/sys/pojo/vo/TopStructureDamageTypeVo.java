@@ -13,8 +13,8 @@ import java.util.List;
 @ApiModel(value = "TopStructureDamageTypeVo对象")
 public class TopStructureDamageTypeVo {
 
-    @ApiModelProperty(value = "上部构件类型id")
-    private String topStructureComponentId;
+    @ApiModelProperty(value = "上部构件损坏类型id")
+    private String topStructureDamageTypeId;
 
     @ApiModelProperty(value = "上部结构损坏类型名")
     private String topStructureDamageTypeName;
@@ -23,5 +23,5 @@ public class TopStructureDamageTypeVo {
     private String topStructureDamageTypeExplanation;
 
     @ApiModelProperty(value = "上部结构损坏类型对应的等级")
-    private List<TopStructureDamageClassVo> topStructureDamageClassVoList;
+    private List<TopStructureDamageClassVo> topStructureDamageClassVos;
 }

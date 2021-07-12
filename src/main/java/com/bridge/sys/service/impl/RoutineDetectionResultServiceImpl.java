@@ -1,11 +1,14 @@
 package com.bridge.sys.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.bridge.common.utils.RespBean;
 import com.bridge.common.utils.UserUtil;
 import com.bridge.sys.mapper.RoutineDetectionMapper;
+import com.bridge.sys.mapper.UserMapper;
 import com.bridge.sys.pojo.RoutineDetection;
 import com.bridge.sys.pojo.RoutineDetectionResult;
 import com.bridge.sys.mapper.RoutineDetectionResultMapper;
+import com.bridge.sys.pojo.User;
 import com.bridge.sys.pojo.dto.RoutineDetectionResultsDto;
 import com.bridge.sys.service.IRoutineDetectionResultService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -32,7 +35,7 @@ public class RoutineDetectionResultServiceImpl extends ServiceImpl<RoutineDetect
     private RoutineDetectionMapper routineDetectionMapper;
 
     @Autowired
-    private UserUtil userUtil;
+    private UserMapper userMapper;
 
     /**
      * 日常检测结果提交
@@ -47,9 +50,12 @@ public class RoutineDetectionResultServiceImpl extends ServiceImpl<RoutineDetect
             return RespBean.error("日常检测结果提交失败, 权限不足");
         }
         try {
-            Integer userId = userUtil.getUserIdByUsername(principal.getName());
+            User user = userMapper.selectOne(new QueryWrapper<User>().eq("username", principal.getName()));
+            if (user == null || user.getType() != 2) {
+                return RespBean.error("日常检测结果提交失败, 权限不足");
+            }
             RoutineDetection routineDetection = routineDetectionResultsDto.getRoutineDetection();
-            routineDetection.setUserId(userId);
+            routineDetection.setUserId(user.getUserId());
             routineDetection.setRoutineDetectionDate(LocalDate.now());
             if (routineDetectionMapper.insert(routineDetection) <= 0) {
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -60,7 +66,10 @@ public class RoutineDetectionResultServiceImpl extends ServiceImpl<RoutineDetect
                 detectionResult.setRoutineDetectionDate(LocalDate.now());
                 detectionResult.setBridgeId(bridgeId);
             });
-            this.saveBatch(routineDetectionResultsDto.getRoutineDetectionResults());
+            if (!this.saveBatch(routineDetectionResultsDto.getRoutineDetectionResults())) {
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                return RespBean.error("日常检测结果提交失败");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

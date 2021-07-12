@@ -27,11 +27,14 @@ public class PeriodicDetectionResultDto {
     private Integer userId;
 
     @ApiModelProperty(value = "桥面系检测结果", required = true)
-    private List<BridgeDeckDetectionResult> bridgeDeckDetectionResults;
+    private List<BridgeDeckDetectionDto> bridgeDeckDetectionDtoList;
 
     @ApiModelProperty(value = "上部结构检测结果", required = true)
-    private List<List<TopStructureDetectionResult>> topStructureDetectionResults;
+    private List<List<TopStructureDetectionDto>> topStructureDetectionDtoList;
 
-    @ApiModelProperty(value = "下部结构检测结果", required = true)
-    private List<List<BottomStructureDetectionResult>> bottomStructureDetectionResults;
+    @ApiModelProperty(value = "下部结构桥墩检测结果", required = true)
+    private List<List<BottomStructureDetectionDto>> bottomStructurePierDetectionDtoList;
+
+    @ApiModelProperty(value = "下部结构桥台检测结果", required = true)
+    private List<List<BottomStructureDetectionDto>> bottomStructureAbutmentDetectionDtoList;
 }

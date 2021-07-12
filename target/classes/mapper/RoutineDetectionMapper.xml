@@ -20,7 +20,8 @@
         from
             routine_detection as rd, user
         where
-            rd.bridge_id = #{bridgeId} and rd.user_id = user.user_id;
+            rd.bridge_id = #{bridgeId} and rd.user_id = user.user_id
+            order by rd.routine_detection_date desc;
     </select>
 
     <resultMap id="routineDetectionHistory" type="routineDetectionHistoryVo">

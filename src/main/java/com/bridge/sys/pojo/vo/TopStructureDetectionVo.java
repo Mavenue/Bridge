@@ -21,5 +21,5 @@ public class TopStructureDetectionVo {
     private Double weight;
 
     @ApiModelProperty(value = "上部构件对应的损坏类型")
-    private List<TopStructureDamageTypeVo> topStructureDamageTypeVoList;
+    private List<TopStructureDamageTypeVo> topStructureDamageTypeVos;
 }
